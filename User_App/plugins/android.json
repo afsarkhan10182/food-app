@@ -1,0 +1,53 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "com.paypal.cordova.mobilesdk": {
+      "PACKAGE_NAME": "com.fdaAppSaharanPunit"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.fdaAppSaharanPunit"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.fdaAppSaharanPunit"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "com.fdaAppSaharanPunit"
+    },
+    "cordova-plugin-ionic-webview": {
+      "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+",
+      "PACKAGE_NAME": "com.fdaAppSaharanPunit"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.fdaAppSaharanPunit"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.fdaAppSaharanPunit"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.fdaAppSaharanPunit"
+    },
+    "onesignal-cordova-plugin": {
+      "PACKAGE_NAME": "com.fdaAppSaharanPunit"
+    },
+    "cordova-plugin-stripe": {
+      "PACKAGE_NAME": "com.fdaAppSaharanPunit"
+    },
+    "cordova-plugin-nativegeocoder": {
+      "PACKAGE_NAME": "com.fdaAppSaharanPunit"
+    }
+  },
+  "dependent_plugins": {
+    "card.io.cordova.mobilesdk": {
+      "PACKAGE_NAME": "com.fdaAppSaharanPunit"
+    },
+    "cordova-plugin-add-swift-support": {
+      "PACKAGE_NAME": "com.fdaAppSaharanPunit"
+    }
+  }
+}

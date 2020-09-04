@@ -1,0 +1,4 @@
+#Fri Jan 24 13:04:04 IST 2020
+base.0=/Users/hispiritstechnologies/apps/fda_delivery/platforms/android/app/build/intermediates/transforms/dex/release/0
+path.0=classes.dex
+renamed.0=classes.dex
