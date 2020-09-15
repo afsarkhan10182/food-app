@@ -11,17 +11,17 @@ import { ServerService } from '../service/server.service';
 })
 export class ItemPage implements OnInit {
 
-  data:any;
+  data: any;
   veg = false;
-  cart_no:any;
-  count:any;
-  text:any;
-  cart:any = [];
+  cart_no: any;
+  count: any;
+  text: any;
+  cart: any = [];
 
-  constructor(public modalController: ModalController,public toastController: ToastController,public server : ServerService,) { 
+  constructor(public modalController: ModalController, public toastController: ToastController, public server: ServerService,) {
 
-   this.data = JSON.parse(localStorage.getItem('menu_item'));
-   this.text = JSON.parse(localStorage.getItem('app_text'));
+    this.data = JSON.parse(localStorage.getItem('menu_item'));
+    this.text = JSON.parse(localStorage.getItem('app_text'));
 
 
   }
@@ -29,52 +29,47 @@ export class ItemPage implements OnInit {
   ngOnInit() {
   }
 
-  ionViewWillEnter()
-  {
-    if(localStorage.getItem('cart_no') == 'null' || localStorage.getItem('cart_no') == undefined)
-    {
-      this.cart_no = Math.floor(Math.random()*2000000000)+1;
+  ionViewWillEnter() {
+    if (localStorage.getItem('cart_no') == 'null' || localStorage.getItem('cart_no') == undefined) {
+      this.cart_no = Math.floor(Math.random() * 2000000000) + 1;
 
-      localStorage.setItem('cart_no',this.cart_no);
+      localStorage.setItem('cart_no', this.cart_no);
     }
-    else
-    {
+    else {
       this.cart_no = localStorage.getItem('cart_no');
     }
 
-    this.server.cartCount(this.cart_no).subscribe((response:any) => {
+    this.server.cartCount(this.cart_no).subscribe((response: any) => {
 
       this.count = response.data;
-      this.cart  = response.cart;
+      this.cart = response.cart;
 
 
-     });
+    });
   }
 
-  vegOnly()
-  {
-  	this.veg = this.veg == true ? false : true;
+  vegOnly() {
+    this.veg = this.veg == true ? false : true;
   }
 
-  async showOption(item,currency) {
+  async showOption(item, currency) {
     const modal = await this.modalController.create({
       component: OptionPage,
-      animated:true,
-      mode:'ios',
+      animated: true,
+      mode: 'ios',
       cssClass: 'my-custom-modal-css',
-      backdropDismiss:false,
+      backdropDismiss: false,
       componentProps: {
-      'item': item,
-      'currency' : currency
-    }
+        'item': item,
+        'currency': currency
+      }
 
     });
 
-   modal.onDidDismiss().then(data=>{
-      
-      if(data.data.id)
-      {
-        this.addToCart(data.data.id,data.data.price,data.data.type,data.data.addonData); 
+    modal.onDidDismiss().then(data => {
+
+      if (data.data.id) {
+        this.addToCart(data.data.id, data.data.price, data.data.type, data.data.addonData);
       }
 
     })
@@ -82,19 +77,22 @@ export class ItemPage implements OnInit {
     return await modal.present();
   }
 
-  addToCart(id,price,type = 0,addon = [])
-  {
+  addToCart(id, price, type = 0, addon = []) {
+
+    if (type !== 0) {
+      this.server.setStoreQty(type);
+    }
     this.presentToast("Added Successfully");
 
-     var allData = {cart_no : this.cart_no, id : id,price : price,qtype : type,type:0,addon : addon};
+    var allData = { cart_no: this.cart_no, id: id, price: price, qtype: type, type: 0, addon: addon };
 
-     this.server.addToCart(allData).subscribe((response:any) => {
+    this.server.addToCart(allData).subscribe((response: any) => {
 
       this.count = response.data.count;
-      this.cart  = response.data.cart;
+      this.cart = response.data.cart;
 
 
-     });
+    });
   }
 
   async presentToast(txt) {
@@ -105,12 +103,9 @@ export class ItemPage implements OnInit {
     toast.present();
   }
 
-  hasCart(id)
-  {
-    for(var i =0;i<this.cart.length;i++)
-    {
-      if(this.cart[i].item_id == id)
-      {
+  hasCart(id) {
+    for (var i = 0; i < this.cart.length; i++) {
+      if (this.cart[i].item_id == id) {
         return this.cart[i].qty;
       }
     }
@@ -118,14 +113,13 @@ export class ItemPage implements OnInit {
     return false;
   }
 
-  async updateCart(id,type = 0)
-  {
+  async updateCart(id, type = 0) {
     this.presentToast("Removed Successfully");
 
-    this.server.updateCart(id,type+"?cart_no="+this.cart_no+"&lid="+localStorage.getItem('lid')).subscribe((response:any) => {
-    
-    this.cart = response.data;
-    
+    this.server.updateCart(id, type + "?cart_no=" + this.cart_no + "&lid=" + localStorage.getItem('lid')).subscribe((response: any) => {
+
+      this.cart = response.data;
+
     });
   }
 }	
