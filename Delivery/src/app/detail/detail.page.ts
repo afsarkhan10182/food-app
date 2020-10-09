@@ -43,8 +43,13 @@ export class DetailPage {
         }, {
           text: 'Yes',
           handler: () => {
+            if (status == 2) {
+              this.cancelOrder(id, status);
+            } else {
+              this.startRide(id, status);
+            }
 
-            this.startRide(id, status);
+
 
           }
         }
@@ -72,6 +77,27 @@ export class DetailPage {
       }
 
       this.status = 4;
+
+      loading.dismiss();
+
+    });
+  }
+
+  async cancelOrder(id, type) {
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+    });
+    await loading.present();
+    var allData = { id: id, desc: 'w' }
+    this.server.cancelOrder(allData).subscribe((response: any) => {
+
+      if (type == 2) {
+        this.presentToast("Order Cancelled Successfully.");
+
+        this.nav.navigateRoot('home');
+      }
+
+      this.status = 2;
 
       loading.dismiss();
 

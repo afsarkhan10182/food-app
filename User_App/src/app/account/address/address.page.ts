@@ -104,8 +104,7 @@ export class AddressPage implements OnInit {
     });
     await loading.present();
 
-    var allData = {address : 'pune',lat : 10,lng : 45,user_id : localStorage.getItem('user_id')}
-    // var allData = {address : data.address,lat : this.map.center.lat(),lng : this.map.center.lng(),user_id : localStorage.getItem('user_id')}
+    var allData = {address : data.address,lat : this.map.center.lat(),lng : this.map.center.lng(),user_id : localStorage.getItem('user_id')}
 
     this.server.saveAddress(allData).subscribe((response:any) => {
   

@@ -106,6 +106,9 @@
         <ion-col size="4" class="border_bottom_only" *ngIf="data.discount == 0"><a
                 (click)="coupen()">{{ text.cart_apply }}</a></ion-col>
 
+        <ion-col size="8" class="border_bottom_only" *ngIf="data.isPenalty == 1">Penalty Charges</ion-col>
+        <ion-col size="4" class="border_bottom_only" *ngIf="data.isPenalty == 1">
+            {{ data.currency }}{{ data.penalty_charge }}</ion-col>
         <ion-col size="8" class="border_bottom_only">{{ text.cart_payable }}</ion-col>
         <ion-col size="4" class="border_bottom_only"><b>{{ data.currency }}{{ data.total }}</b></ion-col>
     </ion-row>
@@ -113,7 +116,8 @@
 
     <div class="ion-padding" *ngIf="data && data.total > 0">
         <ion-item>
-            <ion-textarea placeholder="Any instruction for food...e.g extra spicy" (input)="setNotes($event)" [(ngModel)]="notes" name="notes">
+            <ion-textarea placeholder="Any instruction for food...e.g extra spicy" (input)="setNotes($event)"
+                [(ngModel)]="notes" name="notes">
             </ion-textarea>
         </ion-item>
         <br>

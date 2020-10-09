@@ -16,6 +16,7 @@ export class CartPage implements OnInit {
   discount: any;
   text: any;
   notes: any;
+  isPenalty: any;
 
   constructor(public modalController: ModalController, public server: ServerService, public toastController: ToastController, public loadingController: LoadingController, private nav: NavController) {
     this.text = JSON.parse(localStorage.getItem('app_text'));
@@ -29,10 +30,9 @@ export class CartPage implements OnInit {
   async loadData() {
     var lid = localStorage.getItem('lid') ? localStorage.getItem('lid') : 0;
 
-    this.server.getCart(localStorage.getItem('cart_no') + "?lid=" + lid).subscribe((response: any) => {
+    this.server.getCart(localStorage.getItem('cart_no') + "?lid=" + lid + "&user_id=" + localStorage.getItem('user_id')).subscribe((response: any) => {
 
       this.data = response.data;
-
     });
   }
 
@@ -43,7 +43,7 @@ export class CartPage implements OnInit {
     });
     await loading.present();
 
-    this.server.updateCart(id, type + "?lid=" + localStorage.getItem('lid')).subscribe((response: any) => {
+    this.server.updateCart(id, type + "?lid=" + localStorage.getItem('lid') + "&user_id=" + localStorage.getItem('user_id')).subscribe((response: any) => {
 
       this.data = response.data;
 
@@ -92,7 +92,7 @@ export class CartPage implements OnInit {
     });
     await loading.present();
 
-    this.server.applyCoupen(id, localStorage.getItem('cart_no') + "?lid=" + localStorage.getItem('lid')).subscribe((response: any) => {
+    this.server.applyCoupen(id, localStorage.getItem('cart_no') + "?lid=" + localStorage.getItem('lid') + "&user_id=" + localStorage.getItem('user_id')).subscribe((response: any) => {
 
       if (response.msg == "done") {
         this.data = response.data;

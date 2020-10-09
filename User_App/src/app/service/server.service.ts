@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 export class ServerService {
 
   //put /api/ after your url e.g https://www.abc.com/api/
-  url = "http://localhost:8085/delivery/api/";
+  url = "http://staging.1stopsouq.com/api/";
 
   qty: any;
   constructor(private http: HttpClient) { }
