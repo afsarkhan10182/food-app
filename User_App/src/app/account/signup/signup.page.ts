@@ -31,9 +31,9 @@ export class SignupPage implements OnInit {
 
     this.server.signup(data).subscribe((response:any) => {
   
-    if(response.msg == "error")
+    if(response.msg != "done")
     {
-      this.presentToast(response.error);
+      this.presentToast(response.msg);
     }
     else
     {
