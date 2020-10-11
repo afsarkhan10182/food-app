@@ -45,7 +45,7 @@ export class LoginPage implements OnInit {
 
       if(localStorage.getItem('cart_no'))
       {
-        this.nav.navigateBack('cart');  
+        this.nav.navigateBack('home');  
       }
       else
       {
