@@ -207,7 +207,7 @@ export class AppComponent {
   }
 
   subPush(id = 0) {
-    this.oneSignal.startInit('dc5bdd0d-b87c-4c08-bb6e-255d43ab7d29', '656232489650');
+    this.oneSignal.startInit('5aed5b35-8dc2-40cb-a8be-860dd10e9553', '193420843567');
 
     this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
 
