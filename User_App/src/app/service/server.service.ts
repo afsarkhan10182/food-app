@@ -150,7 +150,7 @@ export class ServerService {
   }
 
   updateCity(data) {
-    return this.http.post(this.url + 'city', data)
+    return this.http.get(this.url + 'city?lid=' + data)
       .pipe(map(results => results));
   }
 
